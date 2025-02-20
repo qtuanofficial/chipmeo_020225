@@ -1,7 +1,23 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.pacifico-regular {
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.sour-gummy {
+    font-family: "Sour Gummy", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 body {
@@ -16,7 +32,7 @@ body {
 span {
     position: absolute;
     pointer-events: none;
-    filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
     animation: fadeInOut 1s linear infinite;
 }
 
@@ -25,13 +41,17 @@ span {
     0% {
         opacity: 0;
     }
-    20%, 80% {
+
+    20%,
+    80% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
 }
+
 span::before {
     content: '';
     position: absolute;
@@ -46,7 +66,22 @@ span::before {
     0% {
         transform: translate(0) rotate(0deg);
     }
+
     100% {
-        transform: translate(300px) rotate(360deg); ;
+        transform: translate(300px) rotate(360deg);
+        ;
+    }
+}
+
+.blinking-text {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
     }
 }
