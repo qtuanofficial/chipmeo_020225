@@ -1,205 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trái Tim Sinh Động</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(#4c0c0c, #000);
-            overflow: hidden;
-        }
-        
-        .container {
-            position: relative;
-            width: 250px;  /* Giảm từ 300px */
-            height: 250px; /* Giảm từ 300px */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .heart-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1.5s ease-out;
-        }
-        
-        .heart {
-            position: relative;
-            width: 120px;   /* Giảm từ 150px */
-            height: 120px;  /* Giảm từ 150px */
-            background: #ff2e63;
-            transform: rotate(45deg);
-            box-shadow: 0 0 40px #ff2e63;
-            animation: beat 1.5s ease-in-out infinite;
-        }
-        
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 120px;   /* Giảm từ 150px */
-            height: 120px;  /* Giảm từ 150px */
-            background: #ff2e63;
-            border-radius: 50%;
-        }
-        
-        .heart::before {
-            top: -60px;    /* Điều chỉnh từ -75px */
-            left: 0;
-        }
-        
-        .heart::after {
-            top: 0;
-            left: -60px;   /* Điều chỉnh từ -75px */
-        }
-        
-        .glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 10;
-            filter: blur(20px);
-        }
-        
-        .particles {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 46, 99, 0.5);
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ff2e63;
-        }
-        
-        .rings {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .ring {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border: 2px solid rgba(255, 46, 99, 0.5);
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        .quote {
-            margin-top: 25px; /* Giảm từ 30px */
-            color: white;
-            font-family: 'Georgia', serif;
-            font-size: 16px;  /* Giảm từ 20px */
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 2s ease, transform 2s ease;
-            text-shadow: 0 0 10px rgba(255, 46, 99, 0.8);
-            font-style: italic;
-            max-width: 250px; /* Giảm từ 300px */
-        }
-        
-        .moved .heart-container {
-            transform: translateY(-40px); /* Giảm khoảng cách di chuyển từ -80px xuống -40px */
-        }
-        
-        .moved .quote {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        @keyframes beat {
-            0% {
-                transform: rotate(45deg) scale(1);
-            }
-            15% {
-                transform: rotate(45deg) scale(1.25);
-            }
-            30% {
-                transform: rotate(45deg) scale(1);
-            }
-            45% {
-                transform: rotate(45deg) scale(1.15);
-            }
-            60% {
-                transform: rotate(45deg) scale(1);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes expand {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(4);
-                opacity: 0;
-            }
-        }
-
-        .back-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;  /* Thay đổi từ left sang right */
-            padding: 8px 15px;
-            background: none;
-            color: rgba(255, 255, 255, 0.7);
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .back-button:hover {
-            color: rgba(255, 255, 255, 1);
-            transform: translateX(-5px);
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/heart_style.css">
 </head>
+
 <body>
     <div class="container" id="mainContainer">
         <div class="heart-container">
@@ -208,80 +16,18 @@
             <div class="particles" id="particles"></div>
             <div class="rings" id="rings"></div>
         </div>
+        <div class="initial-quote">
+            <strong>This is how two hearts look when they first meet...</strong>
+        </div>
+        <div class="transition-quote">
+            <strong>As time passes, they grow closer together...</strong>
+        </div>
         <div class="quote">
-            <strong>Believe in the spirit of love… it can heal all things.</strong>
+            <strong></strong>
         </div>
     </div>
     <button class="back-button" onclick="window.location.href='../index.html'">↩ Back</button>
-    <script>
-        // Tạo các hạt nhỏ bay lên từ trái tim
-        const particlesContainer = document.getElementById('particles');
-        const ringsContainer = document.getElementById('rings');
-        const mainContainer = document.getElementById('mainContainer');
-        
-        function createParticles() {
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    
-                    // Vị trí ngẫu nhiên xung quanh trái tim
-                    const x = Math.random() * 200 - 100;
-                    const y = Math.random() * 200 - 100;
-                    
-                    particle.style.left = `${x}px`;
-                    particle.style.top = `${y}px`;
-                    particle.style.opacity = Math.random() * 0.5 + 0.3;
-                    particle.style.width = `${Math.random() * 8 + 2}px`;
-                    particle.style.height = particle.style.width;
-                    
-                    // Hiệu ứng bay lên
-                    particle.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
-                    
-                    particlesContainer.appendChild(particle);
-                    
-                    // Xóa hạt sau khi hiệu ứng kết thúc
-                    setTimeout(() => {
-                        particle.remove();
-                    }, 5000);
-                }, i * 100);
-            }
-        }
-        
-        function createRings() {
-            const ring = document.createElement('div');
-            ring.classList.add('ring');
-            ring.style.animation = `expand 2s ease-out forwards`;
-            ringsContainer.appendChild(ring);
-            
-            // Xóa vòng sau khi hiệu ứng kết thúc
-            setTimeout(() => {
-                ring.remove();
-            }, 2000);
-        }
-        
-        // Chạy hiệu ứng hạt định kỳ
-        setInterval(createParticles, 3000);
-        
-        // Chạy hiệu ứng vòng phát ra định kỳ
-        setInterval(createRings, 1500);
-        
-        // Thêm hiệu ứng nhấp nháy cho trái tim
-        const heart = document.querySelector('.heart');
-        setInterval(() => {
-            heart.style.boxShadow = `0 0 ${Math.random() * 60 + 20}px #ff2e63`;
-        }, 1000);
-        
-        // Chạy các hiệu ứng ngay khi trang được tải
-        window.addEventListener('load', () => {
-            createParticles();
-            createRings();
-            
-            // Sau 4 giây, di chuyển trái tim lên và hiện dòng chữ
-            setTimeout(() => {
-                mainContainer.classList.add('moved');
-            }, 1000);
-        });
-    </script>
+    <script src="../assets/js/heart_script.js"></script>
 </body>
+
 </html>

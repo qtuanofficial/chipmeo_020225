@@ -1,8 +1,264 @@
 body {
-    background: radial-gradient(#4c0c0c, #000);
-    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background: radial-gradient(#4c0c0c, #000);
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 250px;
+    /* Giảm từ 300px */
+    height: 250px;
+    /* Giảm từ 300px */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.5s ease-out;
+}
+
+.heart,
+.heart::before,
+.heart::after {
+    transition: all 15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.heart {
+    position: relative;
+    width: 120px;
+    /* Giảm từ 150px */
+    height: 120px;
+    /* Giảm từ 150px */
+    background: #000;
+    /* Bắt đầu với màu đen */
+    transform: rotate(45deg);
+    box-shadow: 0 0 40px #000;
+    animation: beat 1.5s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    /* Giảm từ 150px */
+    height: 120px;
+    /* Giảm từ 150px */
+    background: #000;
+    /* Bắt đầu với màu đen */
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -60px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: -60px;
+}
+
+.heart.red,
+.heart.red::before,
+.heart.red::after {
+    background: #ff2e63;
+}
+
+.heart.red {
+    box-shadow: 0 0 40px #ff2e63;
+}
+
+.glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 10;
+    filter: blur(20px);
+}
+
+.particles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 46, 99, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff2e63;
+}
+
+.rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ring {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 46, 99, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.quote,
+.initial-quote,
+.transition-quote {
+    margin-top: 35px;
+    /* Giảm khoảng cách xuống */
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    /* Giảm từ 20px */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+    text-shadow: 0 0 10px rgba(255, 46, 99, 0.8);
+    font-style: italic;
+    max-width: 250px;
+    /* Giảm từ 300px */
+    position: absolute;
+    bottom: -20px;
+    /* Điều chỉnh vị trí gần hơn */
+}
+
+.quote.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.moved .heart-container {
+    transform: translateY(-20px);
+    /* Giảm khoảng cách di chuyển */
+}
+
+@keyframes beat {
+    0% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    15% {
+        transform: rotate(45deg) scale(1.25);
+    }
+
+    30% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    45% {
+        transform: rotate(45deg) scale(1.15);
+    }
+
+    60% {
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes expand {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes colorTransition {
+    0% {
+        background: #000;
+        box-shadow: 0 0 40px #000;
+    }
+
+    100% {
+        background: #ff2e63;
+        box-shadow: 0 0 40px #ff2e63;
+    }
+}
+
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* Thay đổi từ left sang right */
+    padding: 8px 15px;
+    background: none;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(-5px);
 }
