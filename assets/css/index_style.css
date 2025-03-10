@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .pacifico-regular {
@@ -64,12 +68,11 @@ span::before {
 
 @keyframes moveShape {
     0% {
-        transform: translate(0) rotate(0deg);
+        transform: translate(0) rotate(0deg) scale(1);
     }
 
     100% {
-        transform: translate(300px) rotate(360deg);
-        ;
+        transform: translate(100px) rotate(360deg) scale(0);
     }
 }
 
@@ -84,4 +87,30 @@ span::before {
     50% {
         opacity: 0;
     }
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.sour-gummy:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.blinking-text:hover {
+    animation: none;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.timeline-hover {
+    display: inline-block;
+    transition: transform 0.3s ease !important;
+}
+
+.timeline-hover:hover {
+    transform: scale(1.2) !important;
+    opacity: 1 !important;
 }
